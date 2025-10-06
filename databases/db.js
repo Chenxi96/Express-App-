@@ -12,10 +12,21 @@ const blogSchema = new Schema({
     updatedAt: Date
 });
 
+// Skills schema
+const skillSchema = new Schema({
+    title: String,
+    body: String,
+})
+
+// Initialize Skill model
+const Skill = mongoose.model('skill', skillSchema);
+
 
 // Initialize Blog model
 const Blog = mongoose.model('blog', blogSchema);
 
+
+// BLOG
 const addBlogs = async () => {
     return await Blog.insertMany([
         {
@@ -57,9 +68,45 @@ const createBlog = async (blogForm) => {
 
 const viewBlog = async (blogId) => await Blog.findOne({_id: blogId});
 
+// SKILL
+const addSkills = async () => {
+    await Skill.insertMany([
+        {
+            title: "Javascript",
+            body: "Work with Javascript"
+        },
+        {
+            title: "CSS",
+            body: "Worked with CSS"
+        },
+        {
+            title: "HTML",
+            body: "Worked with HTML"
+        },
+        {
+            title: "Node",
+            body: "Worked with Node"
+        },
+        {
+            title: "Express",
+            body: "Worked with Express"
+        },
+        {
+            title: "C#",
+            body: "Worked with C#"
+        },
+    ])
+}
+
+const listSkills = async () => {
+    return Skill.find({});
+}
+
 export default {
     addBlogs,
     listBlogs,
     createBlog,
     viewBlog,
+    addSkills,
+    listSkills
 }

@@ -3,7 +3,7 @@ extends layout
 block mainContent
     div
         if crud === "Update"
-            h1 #{crud} Blog Post 
+            h1 #{crud} skill
             form(id="form" action="/blogs/createPost" method="post")
                 div 
                     label(for="title-name") Title:
@@ -14,14 +14,10 @@ block mainContent
                 div
                     label(for="description") Descriptions:
                     textarea(id="description" name="description")
-
-                input(id="createdDate" name="createdAt" type="hidden")
-            
-                input(id="updatedDate" name="updatedAt" type="hidden" value=`${blog.updatedAt}`)
 
                 input(type="submit")
         else
-            h1 #{crud} Blog Post 
+            h1 #{crud} skill 
             form(id="form" action="/blogs/createPost" method="post")
                 div 
                     label(for="title-name") Title:
@@ -32,9 +28,5 @@ block mainContent
                 div
                     label(for="description") Descriptions:
                     textarea(id="description" name="description")
-
-                input(id="createdDate" name="createdAt" type="hidden")
-            
-                input(id="updatedDate" name="updatedAt" type="hidden")
 
                 input(type="submit")

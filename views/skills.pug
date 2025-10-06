@@ -1,0 +1,17 @@
+extends layout 
+
+block mainContent 
+    h1 Skills
+    a(href="/admin/skills/create") 
+        p  Create Skill
+    each skill in skills
+        div 
+            h2 #{skill.title}
+            p #{skill.body}
+            p #{skill.createdAt}
+            form(action="/skills/delete")
+                input(type="hidden" value=`${skill._id}`)
+                input(type="submit" value="Delete")
+            form(action="skills/update" method="post") 
+                input(type="hidden" name="_id" value=`${skill._id}`)
+                input(type="submit" value="Update")

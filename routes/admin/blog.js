@@ -27,7 +27,7 @@ router.get('/create', async (request, response) => {
 
 router.post('/update', async (request, response) => {
     const id = request.body._id;
-
+    console.log(request.body)
     const blog = await db.viewBlog(id);
     
     response.render('blogForm', { name: "Update", crud: "Update", blog: blog});
