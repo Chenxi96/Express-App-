@@ -2,7 +2,8 @@ extends layout
 
 block mainContent 
     h1 Blogs 
-
+    a(href="/admin/blogs/create") 
+        p  Create Blog 
     each blog in blogs
         div 
             h2 #{blog.title}
