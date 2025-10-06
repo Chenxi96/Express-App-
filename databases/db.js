@@ -55,8 +55,11 @@ const createBlog = async (blogForm) => {
     })
 };
 
+const viewBlog = async (blogId) => await Blog.findOne({_id: blogId});
+
 export default {
     addBlogs,
     listBlogs,
-    createBlog
+    createBlog,
+    viewBlog,
 }

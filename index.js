@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 import "dotenv/config";
 import path, { join } from 'path';
 
@@ -33,8 +33,20 @@ app.get('/admin/', async (request, response) => {
 
 app.post('/admin/createPost', async (request, response) => {
     const data = request.body;
-    createBlog(data.titleName, data.description, data.image);
+    await db.createBlog(data.titleName, data.description, data.image);
     response.redirect('/admin')
+})
+
+app.get('/admin/create', async (request, response) => {
+    response.render('blogForm', { crud: "Create"})
+})
+
+app.post('/admin/update', async (request, response) => {
+    const id = request.body._id;
+
+    const blog = await db.viewBlog(id);
+    
+    response.render('blogForm', { name: "Update", crud: "Update", blog: blog});
 })
 
 

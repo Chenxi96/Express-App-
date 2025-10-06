@@ -5,6 +5,12 @@ block mainContent
 
     each blog in blogs
         div 
-            p #{blog.title}
+            h2 #{blog.title}
             p #{blog.body}
             p #{blog.createdAt}
+            form(action="admin/delete")
+                input(type="hidden" value=`${blog._id}`)
+                input(type="submit" value="Delete")
+            form(action="admin/update" method="post") 
+                input(type="hidden" name="_id" value=`${blog._id}`)
+                input(type="submit" value="Update")
