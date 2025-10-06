@@ -3,7 +3,14 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        script(type="module", src="/js/script.js") 
         link(rel="stylesheet", href="/css/style.css")
-        title #{name} | Home
+        title #{name}
     body
-        
+        header 
+            include partials/header
+        main
+            block mainContent 
+    footer
+        include partials/footer
+

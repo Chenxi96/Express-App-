@@ -1,0 +1,10 @@
+extends layout 
+
+block mainContent 
+    h1 Blogs 
+
+    each blog in blogs
+        div 
+            p #{blog.title}
+            p #{blog.body}
+            p #{blog.createdAt}

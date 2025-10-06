@@ -1,15 +1,8 @@
 import express from "express";
 import "dotenv/config";
-import path from 'path';
-import { MongoClient } from "mongodb";
-import { time } from "console";
+import path, { join } from 'path';
 
-// Connection string to MongoDB server
-const uri = process.env.MONGO_URI;
-// Create a connection to mongoDB
-const client = new MongoClient(uri);
-// Connect to mongoDB database named "Portfolio"
-const database = client.db("Portfolio");
+import db from "./databases/db.js";
 
 // Absolute path
 const __dirname = import.meta.dirname;
@@ -23,12 +16,26 @@ app.set('view engine', 'pug');
 // Direct to the absolute path to the public folder for the static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.urlencoded({ extended: true }));
+
 const port = process.env.PORT || "8888";
 
-app.get('/', async (request, response) => {
-    response.render('layout', { name: "Admin"});
+app.get('/admin/', async (request, response) => {
+    let blogList = await db.listBlogs();
+
+    if(!blogList.length) {
+        await db.addBlogs();
+        blogList = await db.listBlogs();
+    }
+
+    response.render('blogs', { name: "Admin", blogs: blogList});
 })
 
-app.listen(port, () => console.log(`Example app listening on port http://localhost:${port}`));
+app.post('/admin/createPost', async (request, response) => {
+    const data = request.body;
+    createBlog(data.titleName, data.description, data.image);
+    response.redirect('/admin')
+})
 
-const viewBlogs = async () => database.collection("blogs").find({}).toArray();
+
+app.listen(port, () => console.log(`Example app listening on port http://localhost:${port}`));

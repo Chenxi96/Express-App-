@@ -1,0 +1,22 @@
+extends layout
+
+block mainContent
+    div
+        h1 Create Blog Post 
+        form(action="/admin/createPost" method="post")
+            div 
+                label(for="title-name") Title:
+                input(type="text" id="title-name" name="titleName")
+            div
+                label(for="image") Image:
+                input(type="file" id="image" name="image")
+            div
+                label(for="description") Descriptions:
+                textarea(id="description" name="description")
+
+            input(id="createdDate" name="createdAt" type="hidden" value="")
+        
+            input(id="updatedDate" name="updatedAt" type="hidden" value="")
+
+            input(type="submit")
+
