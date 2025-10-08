@@ -68,6 +68,8 @@ const createBlog = async (blogForm) => {
 
 const viewBlog = async (blogId) => await Blog.findOne({_id: blogId});
 
+const removeBlog = async (blogId) => await Blog.findOneAndDelete({_id: blogId});
+
 // SKILL
 const addSkills = async () => {
     await Skill.insertMany([
@@ -102,11 +104,20 @@ const listSkills = async () => {
     return Skill.find({});
 }
 
+const listSkill = async (id) => {
+    return Skill.findOne({_id: id})
+}
+
+const removeSkill = async (skillId) => await Skill.findOneAndDelete(skillId);
+
 export default {
     addBlogs,
     listBlogs,
     createBlog,
     viewBlog,
+    removeBlog,
     addSkills,
-    listSkills
+    listSkills,
+    listSkill,
+    removeSkill
 }

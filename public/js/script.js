@@ -2,7 +2,7 @@ window.onload = () => {
     const form = document.getElementById('form');
     const updateInput = document.getElementById('createdDate');
 
-    console.log(updateInput)
+
     const getCurrentDate = () => {
         const currentDate = new Date();
         const year = currentDate.getFullYear();
@@ -15,5 +15,5 @@ window.onload = () => {
         return `${year}-${formatMonth}-${formatDay}`
     }
     
-    updateInput.value = getCurrentDate();
+    // updateInput.value = getCurrentDate();
 }

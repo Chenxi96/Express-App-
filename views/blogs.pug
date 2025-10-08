@@ -9,8 +9,8 @@ block mainContent
             h2 #{blog.title}
             p #{blog.body}
             p #{blog.createdAt}
-            form(action="/blogs/delete")
-                input(type="hidden" value=`${blog._id}`)
+            form(action="blogs/delete")
+                input(type="hidden" name="_id" value=`${blog._id}`)
                 input(type="submit" value="Delete")
             form(action="blogs/update" method="post") 
                 input(type="hidden" name="_id" value=`${blog._id}`)

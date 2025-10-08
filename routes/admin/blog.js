@@ -33,5 +33,11 @@ router.post('/update', async (request, response) => {
     response.render('blogForm', { name: "Update", crud: "Update", blog: blog});
 })
 
+router.get('/delete', async (request, response) => {
+    const id = request.query._id;
+    await db.removeBlog(id);
+    response.redirect('/admin/blogs');
+})
+
 
 export default router;

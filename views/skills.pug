@@ -9,8 +9,8 @@ block mainContent
             h2 #{skill.title}
             p #{skill.body}
             p #{skill.createdAt}
-            form(action="/skills/delete")
-                input(type="hidden" value=`${skill._id}`)
+            form(action="skills/delete" method="get")
+                input(type="hidden" name="_id" value=`${skill._id}`)
                 input(type="submit" value="Delete")
             form(action="skills/update" method="post") 
                 input(type="hidden" name="_id" value=`${skill._id}`)

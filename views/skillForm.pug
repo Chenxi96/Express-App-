@@ -7,13 +7,13 @@ block mainContent
             form(id="form" action="/blogs/createPost" method="post")
                 div 
                     label(for="title-name") Title:
-                    input(type="text" id="title-name" name="titleName")
+                    input(type="text" id="title-name" name="titleName" value=`${skill.title}`)
                 div
                     label(for="image") Image:
                     input(type="file" id="image" name="image")
                 div
                     label(for="description") Descriptions:
-                    textarea(id="description" name="description")
+                    textarea(id="description" name="description" value=`${skill.body}`)
 
                 input(type="submit")
         else
