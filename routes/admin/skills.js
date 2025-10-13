@@ -1,8 +1,20 @@
-import express from 'express';
+import express, { response } from 'express';
+import multer from "multer";
 
 import db from '../../databases/db.js';
 
+const storage = multer.diskStorage({
+    destination: (request, file, cb) => {
+        cb(null, 'public/img/skills');
+    },
+    filename: (request, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+})
+
 const router = express.Router();
+
+const upload =  multer({ storage: storage});
 
 router.get('/', async (request, response) => {
     let listSkills = await db.listSkills();
@@ -12,6 +24,19 @@ router.get('/', async (request, response) => {
         listSkills = await db.listSkills();
     }
     response.render('skills', { skills: listSkills })
+});
+
+router.get('/create', async (request, response) => {
+    
+    response.render('skillForm', {crud: "Create"});
+})
+
+router.post('/createPost', upload.single('image'), async(request, response) => {
+    const skillForm = request.body;
+    const skillImage = request.file;
+    console.log(skillImage)
+    await db.createSkill(skillForm, skillImage.filename);
+    response.redirect('/admin/skills');
 })
 
 router.post('/update', async (request, response) => {

@@ -1,8 +1,7 @@
-import express, { response } from "express";
+import express from "express";
 import "dotenv/config";
 import path from 'path';
 
-import db from "./databases/db.js";
 
 import admin from './routes/admin/admin.js';
 
@@ -23,6 +22,9 @@ app.use('/admin', admin);
 // Direct to the absolute path to the public folder for the static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', (request, response) => {
+    response.redirect('/admin')
+})
 
 const port = process.env.PORT || "8888";
 

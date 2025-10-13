@@ -16,6 +16,7 @@ const blogSchema = new Schema({
 const skillSchema = new Schema({
     title: String,
     body: String,
+    image: String,
 })
 
 // Initialize Skill model
@@ -60,7 +61,7 @@ const listBlogs = async () => {
 const createBlog = async (blogForm) => {
     await Blog.create({
         title: blogForm.title, 
-        body: blogForm.body, 
+        body: blogForm.body,
         createdAt: blogForm.createdAt, 
         updatedAt: blogForm.updatedAt
     })
@@ -100,12 +101,20 @@ const addSkills = async () => {
     ])
 }
 
+const createSkill = async (skillForm, skillImage) => {
+    return await Skill.create({
+        title: skillForm.title,
+        body: skillForm.description,
+        image: skillImage
+    })
+}
+
 const listSkills = async () => {
-    return Skill.find({});
+    return await Skill.find({});
 }
 
 const listSkill = async (id) => {
-    return Skill.findOne({_id: id})
+    return await Skill.findOne({_id: id})
 }
 
 const removeSkill = async (skillId) => await Skill.findOneAndDelete(skillId);
@@ -117,6 +126,7 @@ export default {
     viewBlog,
     removeBlog,
     addSkills,
+    createSkill,
     listSkills,
     listSkill,
     removeSkill

@@ -7,6 +7,7 @@ block mainContent
     each skill in skills
         div 
             h2 #{skill.title}
+            img(src=`/img/skills/${skill.image}`, alt="Im")
             p #{skill.body}
             p #{skill.createdAt}
             form(action="skills/delete" method="get")
