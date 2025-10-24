@@ -61,7 +61,7 @@ const listBlogs = async () => {
 const createBlog = async (blogForm) => {
     await Blog.create({
         title: blogForm.title, 
-        body: blogForm.body,
+        body: blogForm.description,
         createdAt: blogForm.createdAt, 
         updatedAt: blogForm.updatedAt
     })

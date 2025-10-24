@@ -1,7 +1,7 @@
 window.onload = () => {
     const form = document.getElementById('form');
     const updateInput = document.getElementById('createdDate');
-
+    const blogUpdate = document.getElementById('blogUpdate');
 
     const getCurrentDate = () => {
         const currentDate = new Date();
@@ -15,5 +15,62 @@ window.onload = () => {
         return `${year}-${formatMonth}-${formatDay}`
     }
     
+    const quill = new Quill('#editor', {
+        modules: {
+            toolbar: {
+                container: 
+            [   
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
+                ['bold', 'italic', 'underline', 'strike'], 
+                ['image', 'video', 'formula'],
+                [{ 'header': 1 }, { 'header': 2 }],
+            ],
+                handlers: {
+                // handlers object will be merged with default handlers object
+                image: function (value) {
+                    const input = document.createElement('input');
+                    input.setAttribute('type', 'file');
+                    input.setAttribute('accept', 'image/*');
+                    input.click();
+
+                    input.onchange = async () => {
+                        const file = input;
+
+                        if(!file) return;
+                        console.log(file.files[0]);
+                        const formData = new FormData();
+                        formData.enctype = "multipart/form-data"
+                        formData.append('image', file.files[0]);
+
+                        const res = await fetch('api/upload', {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        const range = this.quill.getSelection(true);
+                        const data = await res.json();
+                        this.quill.insertEmbed(range.index, 'image', data, Quill.sources.USER);
+                    }
+
+                }
+            }
+            
+        }
+        },
+        theme: 'snow'
+    });
+
+    if(window.__DATA__) {
+        quill.setContents(JSON.parse(window.__DATA__))
+    }
+
+    
+    form.onsubmit = () => {
+        const body = document.createElement('textarea');
+        body.name = "description"
+        body.value = `${JSON.stringify(quill.getContents().ops)}`;
+        form.append(body);
+    }
+
     // updateInput.value = getCurrentDate();
 }

@@ -6,6 +6,7 @@ html(lang="en")
         script(type="module", src="/js/script.js") 
         link(rel="stylesheet", href="/css/style.css")
         title #{name}
+        link(href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet")
     body
         header 
             include partials/header
@@ -13,4 +14,5 @@ html(lang="en")
             block mainContent 
     footer
         include partials/footer
-
+    script(src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js")
+        

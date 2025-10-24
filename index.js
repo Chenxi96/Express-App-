@@ -16,6 +16,7 @@ app.set('view engine', 'pug');
 
 // Accepts parsing form data
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use('/admin', admin);
 

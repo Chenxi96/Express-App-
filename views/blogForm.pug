@@ -4,34 +4,27 @@ block mainContent
     div
         if crud === "Update"
             h1 #{crud} Blog Post 
-            form(id="form" action="/blogs/createPost" method="post")
+            form(id="form" action="createPost" method="post")
                 div 
                     label(for="title-name") Title:
-                    input(type="text" id="title-name" name="titleName")
-                div
-                    label(for="image") Image:
-                    input(type="file" id="image" name="image")
-                div
-                    label(for="description") Descriptions:
-                    textarea(id="description" name="description")
-
+                    input(type="text" id="title-name" name="titleName" value=`${title}`)
+                div#editor 
+                script.
+                    window.__DELTA__ = !{JSON.stringify(body)}
                 input(id="createdDate" name="createdAt" type="hidden")
             
-                input(id="updatedDate" name="updatedAt" type="hidden" value=`${blog.updatedAt}`)
+                input(id="updatedDate" name="updatedAt" type="hidden" )
 
                 input(type="submit")
+
         else
             h1 #{crud} Blog Post 
-            form(id="form" action="/blogs/createPost" method="post")
+            form(id="form" action="createPost" method="post")
                 div 
                     label(for="title-name") Title:
                     input(type="text" id="title-name" name="titleName")
-                div
-                    label(for="image") Image:
-                    input(type="file" id="image" name="image")
-                div
-                    label(for="description") Descriptions:
-                    textarea(id="description" name="description")
+                    
+                div#editor
 
                 input(id="createdDate" name="createdAt" type="hidden")
             
