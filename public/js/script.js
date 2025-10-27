@@ -22,7 +22,7 @@ window.onload = () => {
             [   
                 [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
                 ['bold', 'italic', 'underline', 'strike'], 
-                ['image', 'video', 'formula'],
+                [ 'image', 'video', 'formula'],
                 [{ 'header': 1 }, { 'header': 2 }],
             ],
                 handlers: {
@@ -60,16 +60,22 @@ window.onload = () => {
         theme: 'snow'
     });
 
-    if(window.__DATA__) {
-        quill.setContents(JSON.parse(window.__DATA__))
+    if(window.__DELTA__) {
+        quill.setContents(JSON.parse(window.__DELTA__))
     }
 
     
     form.onsubmit = () => {
-        const body = document.createElement('textarea');
-        body.name = "description"
-        body.value = `${JSON.stringify(quill.getContents().ops)}`;
-        form.append(body);
+        const delta = document.createElement('textarea');
+        const html = document.createElement('textarea');
+        html.style.display = "none";
+        html.name = "browser";
+        html.value = `${JSON.stringify(quill.getText())}`;
+    
+        delta.style.display = "none";
+        delta.name = "description";
+        delta.value = `${JSON.stringify(quill.getContents().ops)}`;
+        form.append(delta, html);
     }
 
     // updateInput.value = getCurrentDate();

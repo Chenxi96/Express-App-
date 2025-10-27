@@ -4,29 +4,29 @@ block mainContent
     div
         if crud === "Update"
             h1 #{crud} skill
-            form(id="form" action="/blogs/createPost" method="post")
-                div 
-                    label(for="title-name") Title:
-                    input(type="text" id="title-name" name="title" value=`${skill.title}`)
-                div
-                    label(for="image") Image:
-                    input(type="file" id="image" name="image")
-                div
-                    label(for="description") Descriptions:
-                    textarea(id="description" name="description" ) #{skill.body}
+            form(id="form" action="/blogs/createPost" method="post" enctype="multipart/form-data")
+                div(class="mb-3")
+                    label(for="title-name" class="form-label") Title:
+                    input(type="text" class="form-control" id="title-name" name="title" value=`${skill.title}`)
+                div(class="mb-3")
+                    label(for="image" class="form-label") Image:
+                    input(type="file" id="image" class="form-control" name="image")
+                div(class="mb-3")
+                    label(for="description" class="form-label") Descriptions:
+                    textarea(id="description" class="form-control" name="description" ) #{skill.body}
 
-                input(type="submit")
+                input(type="submit" class="btn btn-primary")
         else
             h1 #{crud} skill 
             form(id="form" action="createPost" method="post" enctype="multipart/form-data")
-                div 
-                    label(for="title-name") Title:
-                    input(type="text" id="title-name" name="title")
-                div
-                    label(for="image") Image:
-                    input(type="file" id="image" name="image")
-                div
-                    label(for="description") Descriptions:
-                    textarea(id="description" name="description")
+                div(class="mb-3")
+                    label(for="title-name" class="form-label") Title:
+                    input(type="text" id="title-name" class="form-control" name="title")
+                div(class="mb-3")
+                    label(for="image" class="form-label") Image:
+                    input(type="file" id="image" class="form-control" name="image")
+                div(class="mb-3")
+                    label(for="description" class="form-label") Descriptions:
+                    textarea(id="description" class="form-control" name="description")
 
-                input(type="submit")
+                input(type="submit" class="btn btn-primary")

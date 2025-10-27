@@ -5,9 +5,9 @@ block mainContent
     a(href="/admin/blogs/create") 
         p  Create Blog 
     each blog in blogs
-        div 
+        div(class="border mb-2 p-2")
             h2 #{blog.title}
-            p #{blog.body}
+            p #{blog.browser}
             p #{blog.createdAt}
             form(action="blogs/delete")
                 input(type="hidden" name="_id" value=`${blog._id}`)

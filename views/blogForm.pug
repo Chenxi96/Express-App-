@@ -7,7 +7,7 @@ block mainContent
             form(id="form" action="createPost" method="post")
                 div 
                     label(for="title-name") Title:
-                    input(type="text" id="title-name" name="titleName" value=`${title}`)
+                    input(type="text" id="title-name" name="title" value=`${title}`)
                 div#editor 
                 script.
                     window.__DELTA__ = !{JSON.stringify(body)}
@@ -22,7 +22,7 @@ block mainContent
             form(id="form" action="createPost" method="post")
                 div 
                     label(for="title-name") Title:
-                    input(type="text" id="title-name" name="titleName")
+                    input(type="text" id="title-name" name="title")
                     
                 div#editor
 

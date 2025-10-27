@@ -5,7 +5,7 @@ block mainContent
     a(href="/admin/skills/create") 
         p  Create Skill
     each skill in skills
-        div 
+        div(class="border mb-2 p-2")
             h2 #{skill.title}
             img(src=`/img/skills/${skill.image}` width="100" alt="Im")
             p #{skill.body}

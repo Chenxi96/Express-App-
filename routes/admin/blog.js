@@ -17,12 +17,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.get('/', async(request, response) => {
-    let blogList = await db.listBlogs();
-
-    if(!blogList.length) {
-        await db.addBlogs();
-        blogList = await db.listBlogs();
-    }
+    const blogList = await db.listBlogs();
 
     response.render('blogs', { name: "Admin", blogs: blogList});
 })
@@ -33,9 +28,14 @@ router.post('/api/upload', upload.single('image'), async (request, response ) =>
     response.json(path);
 })
 
+// Route to retrieve blog collection "admin/blogs/api/listblogs"
+router.get('/api/listBlogs', async(request, response) => {
+    const blogList = await db.listBlogs();
+    response.json(blogList);
+})
+
 router.post('/createPost', async (request, response) => {
     const data = request.body;
-    console.log(data)
     await db.createBlog(data);
     response.redirect('/admin')
 })
@@ -50,7 +50,7 @@ router.post('/update', async (request, response) => {
     const blog = await db.viewBlog(id);
     const blogTitle = blog.title;
     const blogBody = blog.body;
-
+    console.log(blog)
     response.render('blogForm', { name: "Update", crud: "Update", title: blogTitle, body: blogBody});
 })
 
