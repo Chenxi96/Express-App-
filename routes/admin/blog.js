@@ -28,16 +28,18 @@ router.post('/api/upload', upload.single('image'), async (request, response ) =>
     response.json(path);
 })
 
-// Route to retrieve blog collection "admin/blogs/api/listblogs"
-router.get('/api/listBlogs', async(request, response) => {
-    const blogList = await db.listBlogs();
-    response.json(blogList);
-})
 
 router.post('/createPost', async (request, response) => {
     const data = request.body;
+    console.log(data)
     await db.createBlog(data);
     response.redirect('/admin')
+})
+
+router.post('/updatePost', async (request, response) => {
+    const data = request.body;
+    await db.updateBlog(data)
+    response.redirect('/admin');
 })
 
 router.get('/create', async (request, response) => {
@@ -46,12 +48,8 @@ router.get('/create', async (request, response) => {
 
 router.post('/update', async (request, response) => {
     const id = request.body._id;
-
     const blog = await db.viewBlog(id);
-    const blogTitle = blog.title;
-    const blogBody = blog.body;
-    console.log(blog)
-    response.render('blogForm', { name: "Update", crud: "Update", title: blogTitle, body: blogBody});
+    response.render('blogForm', { name: "Update", crud: "Update", blog: blog});
 })
 
 router.get('/delete', async (request, response) => {

@@ -1,7 +1,7 @@
 window.onload = () => {
     const form = document.getElementById('form');
     const updateInput = document.getElementById('createdDate');
-    const blogUpdate = document.getElementById('blogUpdate');
+    const blogUpdate = document.getElementById('updatedDate');
 
     const getCurrentDate = () => {
         const currentDate = new Date();
@@ -14,6 +14,12 @@ window.onload = () => {
 
         return `${year}-${formatMonth}-${formatDay}`
     }
+
+    if(!updateInput.readonly) {
+        updateInput.value = getCurrentDate();
+    }
+
+
     
     const quill = new Quill('#editor', {
         modules: {
@@ -68,6 +74,13 @@ window.onload = () => {
     form.onsubmit = () => {
         const delta = document.createElement('textarea');
         const html = document.createElement('textarea');
+
+        if(!updateInput.readonly) {
+            updateInput.value = getCurrentDate();
+        }
+
+        blogUpdate.value = getCurrentDate();
+
         html.style.display = "none";
         html.name = "browser";
         html.value = `${JSON.stringify(quill.getText())}`;
@@ -78,5 +91,4 @@ window.onload = () => {
         form.append(delta, html);
     }
 
-    // updateInput.value = getCurrentDate();
 }

@@ -43,6 +43,16 @@ const createBlog = async (blogForm) => {
     })
 };
 
+const updateBlog = async (blogForm) => {
+    await Blog.updateOne({ _id: blogForm._id }, {
+        title: blogForm.title, 
+        body: blogForm.description,
+        browser: blogForm.browser,
+        createdAt: blogForm.createdAt, 
+        updatedAt: blogForm.updatedAt
+    })
+}
+
 const viewBlog = async (blogId) => await Blog.findOne({_id: blogId});
 
 const removeBlog = async (blogId) => await Blog.findOneAndDelete({_id: blogId});
@@ -70,6 +80,7 @@ export default {
     listBlogs,
     createBlog,
     viewBlog,
+    updateBlog,
     removeBlog,
     createSkill,
     listSkills,

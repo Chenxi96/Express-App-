@@ -4,16 +4,18 @@ block mainContent
     div
         if crud === "Update"
             h1 #{crud} Blog Post 
-            form(id="form" action="createPost" method="post")
+            form(id="form" action="updatePost" method="post")
                 div 
                     label(for="title-name") Title:
-                    input(type="text" id="title-name" name="title" value=`${title}`)
+                    input(type="text" id="title-name" name="title" value=`${blog.title}`)
                 div#editor 
                 script.
-                    window.__DELTA__ = !{JSON.stringify(body)}
-                input(id="createdDate" name="createdAt" type="hidden")
+                    window.__DELTA__ = !{JSON.stringify(blog.body)}
+                input(id="createdDate" name="createdAt" type="hidden" value=`${blog.createdAt}` readonly)
             
-                input(id="updatedDate" name="updatedAt" type="hidden" )
+                input(id="updatedDate" name="updatedAt" type="hidden" value=`${blog.updatedAt}`)
+
+                input(name="_id" type="hidden" value=`${blog._id}`)
 
                 input(type="submit")
 
@@ -21,7 +23,7 @@ block mainContent
             h1 #{crud} Blog Post 
             form(id="form" action="createPost" method="post")
                 div 
-                    label(for="title-name") Title:
+                    label(for="title-name" class="mb-2") Title:
                     input(type="text" id="title-name" name="title")
                     
                 div#editor
