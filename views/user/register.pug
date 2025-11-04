@@ -1,0 +1,11 @@
+extends ../layout
+
+block mainContent
+    form(action="createProfile", method="post") 
+        div
+            label(for="username") Username: 
+            input(type="text" id="username" name="username")
+        div 
+            label(for="password") Password: 
+            input(type="password" id="password" name="password")
+        button(type="submit") Register

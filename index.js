@@ -1,9 +1,13 @@
-import express from "express";
+import express, { response } from "express";
 import "dotenv/config";
 import path from 'path';
-
+import session from 'express-session';
 
 import admin from './routes/admin/admin.js';
+import user from './routes/admin/user/user.js';
+
+import db from './databases/user/user.js';
+import { request } from "http";
 
 // Absolute path
 const __dirname = import.meta.dirname;
@@ -18,14 +22,38 @@ app.set('view engine', 'pug');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(session({
+    secret: process.env.SESSIONSECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {}
+}))
+
+app.get('/', async(request, response) => {
+    response.redirect('/user');
+})
+
+app.use('/user', user);
+
+
+app.use('/admin',(request, response, next) => {
+    console.log(request.session.loggedIn)
+    if(request.session.loggedIn) {
+        console.log("ran1")
+        app.locals.user = request.session.user;
+        next();
+    } else {
+        console.log("ran")
+        response.redirect('/user')
+    }
+})
+
 app.use('/admin', admin);
+
 
 // Direct to the absolute path to the public folder for the static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (request, response) => {
-    response.redirect('/admin')
-})
 
 const port = process.env.PORT || "8888";
 

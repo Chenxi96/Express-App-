@@ -10,7 +10,7 @@ block mainContent
                     input(type="text" id="title-name" name="title" value=`${blog.title}`)
                 div#editor 
                 script.
-                    window.__DELTA__ = !{JSON.stringify(blog.body)}
+                    window.__DELTA__ = !{JSON.stringify(delta.body)}
                 input(id="createdDate" name="createdAt" type="hidden" value=`${blog.createdAt}` readonly)
             
                 input(id="updatedDate" name="updatedAt" type="hidden" value=`${blog.updatedAt}`)

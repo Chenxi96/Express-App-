@@ -69,7 +69,7 @@ window.onload = () => {
     if(window.__DELTA__) {
         quill.setContents(JSON.parse(window.__DELTA__))
     }
-
+    
     
     form.onsubmit = () => {
         const delta = document.createElement('textarea');

@@ -1,3 +1,9 @@
 block headerContent
     h2
         a(href="/admin") Admin
+        a(href="/admin/skills") Skill 
+        a(href="/admin/blogs") Blog
+        if (!user)
+            a(href="/admin/user") Login
+        else 
+            a(href="/user/logout") Logout

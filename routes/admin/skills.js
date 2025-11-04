@@ -1,7 +1,7 @@
 import express, { response } from 'express';
 import multer from "multer";
 
-import db from '../../databases/db.js';
+import db from '../../databases/skill/skill.js';
 
 const storage = multer.diskStorage({
     destination: (request, file, cb) => {
@@ -18,11 +18,6 @@ const upload =  multer({ storage: storage});
 
 router.get('/', async (request, response) => {
     let listSkills = await db.listSkills();
-    // console.log(listSkills)
-    if(!listSkills.length) {
-        await db.addSkills();
-        listSkills = await db.listSkills();
-    }
     response.render('skills', { skills: listSkills })
 });
 

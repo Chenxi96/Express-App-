@@ -3,7 +3,7 @@ import multer from 'multer';
 
 const router = express.Router();
 
-import db from '../../databases/db.js';
+import db from '../../databases/blog/blog.js';
 
 const storage = multer.diskStorage({
     destination: (request, file, cb) => {
@@ -18,7 +18,7 @@ const upload = multer({ storage });
 
 router.get('/', async(request, response) => {
     const blogList = await db.listBlogs();
-
+    console.log(request.session.user)
     response.render('blogs', { name: "Admin", blogs: blogList});
 })
 
