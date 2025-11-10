@@ -37,13 +37,12 @@ app.use('/user', user);
 
 
 app.use('/admin',(request, response, next) => {
-    console.log(request.session.loggedIn)
+    console.log(request.session.loggedIn);
     if(request.session.loggedIn) {
         console.log("ran1")
         app.locals.user = request.session.user;
         next();
     } else {
-        console.log("ran")
         response.redirect('/user')
     }
 })

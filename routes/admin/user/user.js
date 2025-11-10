@@ -4,12 +4,13 @@ import db from '../../../databases/user/user.js'
 const router = express.Router();
 
 router.get('/', async(request, response) => {
-    response.render('user/login');
+    const user = request.session.user;
+    response.render('user/login', {user: user});
 })
 
 router.post('/login', async(request, response) => {
     const form = request.body;
-    const hasProfile = await db.authenticateUser(form)
+    const hasProfile = await db.authenticateUser(form);
     if(hasProfile) {
         request.session.loggedIn = true;
         request.session.user = form.username
