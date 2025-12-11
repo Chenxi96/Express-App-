@@ -1,20 +1,20 @@
-import express, { response } from 'express';
+import express from 'express';
 import multer from "multer";
 
 import db from '../../databases/skill/skill.js';
 
-const storage = multer.diskStorage({
-    destination: (request, file, cb) => {
-        cb(null, 'public/img/skills');
-    },
-    filename: (request, file, cb) => {
-        cb(null, Date.now() + '-' + file.originalname);
-    }
-})
+import ImageKit from 'imagekit';
+
+const client = new ImageKit({
+    publicKey : "public_T2HdIbpcwGI+SfclDpMuDn/g2oI=",
+    privateKey : process.env.IMAGEKIT_KEY,
+    urlEndpoint : "https://ik.imagekit.io/76nhtc3tu"
+});
+
 
 const router = express.Router();
 
-const upload =  multer({ storage: storage});
+const upload =  multer({ storage: multer.memoryStorage() });
 
 router.get('/', async (request, response) => {
     let listSkills = await db.listSkills();
@@ -22,15 +22,25 @@ router.get('/', async (request, response) => {
 });
 
 router.get('/create', async (request, response) => {
-    
     response.render('skillForm', {crud: "Create"});
 })
 
 router.post('/createPost', upload.single('image'), async(request, response) => {
     const skillForm = request.body;
     const skillImage = request.file;
-    console.log(skillImage)
-    await db.createSkill(skillForm, skillImage.filename);
+    client.upload({
+        file: skillImage.buffer.toString("base64"),
+        fileName: skillImage.originalname,
+        tags: ["skills"],
+        folder: "/skills",
+    }, async function(err, result) {
+        if(err) console.log(err);
+        else {
+
+            console.log(result.url)
+            await db.createSkill(skillForm, result.url)
+        };
+    })
     response.redirect('/admin/skills');
 })
 

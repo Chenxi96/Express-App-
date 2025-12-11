@@ -69,8 +69,6 @@ window.onload = () => {
                             fileName: file.files[0].name,
                             tags: ["blogs"],
                             folder: "/blogs",
-                            width: 1200,
-                            height: 800,
                             token: authResponse.token,
                             signature: authResponse.signature,
                             expire: authResponse.expire
