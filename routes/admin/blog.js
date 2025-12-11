@@ -1,6 +1,14 @@
 import express from 'express';
 import multer from 'multer';
 
+import ImageKit from 'imagekit';
+
+const client = new ImageKit({
+    publicKey : "public_T2HdIbpcwGI+SfclDpMuDn/g2oI=",
+    privateKey : process.env.IMAGEKIT_KEY,
+    urlEndpoint : "https://ik.imagekit.io/76nhtc3tu"
+});
+
 const router = express.Router();
 
 import db from '../../databases/blog/blog.js';
@@ -23,9 +31,10 @@ router.get('/', async(request, response) => {
 })
 
 // Route to upload images to local folder
-router.post('/api/upload', upload.single('image'), async (request, response ) => {
-    const path = (request.file.path).slice(6);
-    response.json(path);
+router.get('/api/upload', async (request, response ) => {
+    const authenticationParameters = client.getAuthenticationParameters();
+    // const path = (request.file.path).slice(6);
+    response.json(authenticationParameters); 
 })
 
 

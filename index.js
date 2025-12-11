@@ -6,8 +6,6 @@ import session from 'express-session';
 import admin from './routes/admin/admin.js';
 import user from './routes/admin/user/user.js';
 
-import db from './databases/user/user.js';
-import { request } from "http";
 
 // Absolute path
 const __dirname = import.meta.dirname;
@@ -39,7 +37,6 @@ app.use('/user', user);
 app.use('/admin',(request, response, next) => {
     console.log(request.session.loggedIn);
     if(request.session.loggedIn) {
-        console.log("ran1")
         app.locals.user = request.session.user;
         next();
     } else {
