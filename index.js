@@ -16,7 +16,7 @@ const __dirname = import.meta.dirname;
 // Initialize Express
 const app = express();
 
-app.use(cors({"origin": "http://localhost:5173"}));
+app.use(cors({"origin": "*"}));
 
 // Set view engine with pug
 app.set('view engine', 'pug');
@@ -71,5 +71,4 @@ app.use(express.static(path.join(__dirname, 'public')));
 const port = process.env.PORT || "8888";
 
 
-// app.listen(port, () => console.log(`Example app listening on port http://localhost:${port}`));
-export default app;
+app.listen(port, () => console.log(`Example app listening on port http://localhost:${port}`));
