@@ -16,7 +16,7 @@ const __dirname = import.meta.dirname;
 // Initialize Express
 const app = express();
 
-app.use(cors({"origin": "*"}));
+app.use(cors({"origin": "http://localhost:5173"}));
 
 // Set view engine with pug
 app.set('view engine', 'pug');
