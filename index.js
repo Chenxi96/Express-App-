@@ -71,4 +71,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 const port = process.env.PORT || "8888";
 
 
-app.listen(port, () => console.log(`Example app listening on port http://localhost:${port}`));
+// app.listen(port, () => console.log(`Example app listening on port http://localhost:${port}`));
+export default app;
