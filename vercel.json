@@ -1,0 +1,22 @@
+{
+ "version": 2,
+ "builds": [
+  {
+   "src": "index.js",
+   "use": "@vercel/node",
+   "config": { "includeFiles": [
+    "dist/**",
+    "databases/**",
+    "public/**",
+    "routes/**",
+    "views/**"
+   ] }
+  }
+ ],
+ "routes": [
+  {
+   "src": "/(.*)",
+   "dest": "index.js"
+  }
+ ]
+}
