@@ -1,0 +1,38 @@
+extends layout
+
+block mainContent
+    div
+        if crud === "Update"
+            h1 #{crud} project
+            form(id="form" action="/blogs/createPost" method="post" enctype="multipart/form-data")
+                div(class="mb-3")
+                    label(for="title-name" class="form-label") Title:
+                    input(type="text" class="form-control" id="title-name" name="title" value=`${project.title}`)
+                div(class="mb-3")
+                    label(for="image" class="form-label") Image:
+                    input(type="file" id="image" class="form-control" name="image")
+                div(class="mb-3")
+                    label(for="description" class="form-label") Descriptions:
+                    input(id="description" class="form-control" name="image_description" )
+                div(class="mb-3")
+                    label(for="description" class="form-label") language used:
+                    input(id="language_used" class="form-control" name="language_used")
+
+                input(type="submit" class="btn btn-primary")
+        else
+            h1 #{crud} project 
+            form(id="form" action="createPost" method="post" enctype="multipart/form-data")
+                div(class="mb-3")
+                    label(for="title-name" class="form-label") Title:
+                    input(type="text" id="title-name" class="form-control" name="title")
+                div(class="mb-3")
+                    label(for="image" class="form-label") Image:
+                    input(type="file" id="image" class="form-control" name="image")
+                div(class="mb-3")
+                    label(for="description" class="form-label") Descriptions:
+                    input(id="image_description" class="form-control" name="image_description")
+                div(class="mb-3")
+                    label(for="description" class="form-label") language used:
+                    input(id="language_used" class="form-control" name="language_used")
+
+                input(type="submit" class="btn btn-primary")

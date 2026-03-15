@@ -13,6 +13,14 @@ const blogSchema = new Schema({
     updatedAt: Date
 });
 
+// Project schema
+const projectSchema = new Schema({
+    title: String,
+    image: String,
+    image_description: String,
+    language_used: [String]
+})
+
 // Skills schema
 const skillSchema = new Schema({
     title: String,
@@ -34,8 +42,12 @@ const Blog = mongoose.model('blog', blogSchema);
 
 const User = mongoose.model('user', userSchema);
 
+// Initialize Project model
+const Project = mongoose.model('project', projectSchema);
+
 export default {
     Skill,
     Blog,
-    User
+    User,
+    Project
 }

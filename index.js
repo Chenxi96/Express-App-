@@ -10,6 +10,8 @@ import dbSkills from './databases/skill/skill.js';
 
 import dbBlogs from './databases/blog/blog.js';
 
+import dbProjects from './databases/project/project.js';
+
 // Absolute path
 const __dirname = import.meta.dirname;
 
@@ -32,16 +34,22 @@ app.use(session({
     cookie: {}
 }))
 
-// Route to retrieve blog collection "admin/api/listblogs"
+// Route to retrieve blog collection "/api/listblogs"
 app.get('/api/listBlogs', async(request, response) => {
     const blogList = await dbBlogs.listBlogs();
     response.json(blogList);
 })
 
-// Route to retrieve skill collection "admin/api/listskills"
+// Route to retrieve skill collection "/api/listskills"
 app.get('/api/listSkills', async(request, response) => {
-    const blogList = await dbSkills.listSkills();
-    response.json(blogList);
+    const skillList = await dbSkills.listSkills();
+    response.json(skillList);
+})
+
+// Route to retrieve project collection "/api/listprojects"
+app.get('/api/listProjects', async(request, response) => {
+    const projectList = await dbProjects.listProjects();
+    response.json(projectList);
 })
 
 app.get('/', async(request, response) => {

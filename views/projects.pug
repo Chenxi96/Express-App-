@@ -1,0 +1,18 @@
+extends layout 
+
+block mainContent 
+    h1(class="text-center") Projects 
+    a(href="/admin/projects/create") 
+        p  Create Project
+    each project in projects
+        div(class="border mb-2 p-2")
+            h2 #{project.title}
+            img(src=`${project.image}` width="100" alt="Im")
+            p #{project.image_description}
+            p #{project.language_used}
+            form(action="projects/delete" method="get")
+                input(type="hidden" name="_id" value=`${project._id}`)
+                input(type="submit" value="Delete")
+            form(action="projects/update" method="post") 
+                input(type="hidden" name="_id" value=`${project._id}`)
+                input(type="submit" value="Update")
